@@ -1,117 +1,162 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dream Entry Device (DED-01)</title>
+  <title>Dream Entry Device Online Store</title>
   <meta charset="UTF-8">
 
   <style>
     body {
       margin: 0;
-      background: #dcdcdc;
-      font-family: "Times New Roman", serif;
-      color: black;
+      background: #9bb7d4;
+      font-family: Arial, Verdana, sans-serif;
+      font-size: 13px;
+      color: #111;
     }
 
-    a { color: blue; text-decoration: underline; cursor: pointer; }
+    a {
+      color: #0000ee;
+      text-decoration: underline;
+      cursor: pointer;
+    }
 
     .container {
-      width: 860px;
-      margin: 25px auto;
+      width: 900px;
+      margin: 15px auto;
       background: white;
-      border: 2px solid black;
-      padding: 20px;
-      box-shadow: 4px 4px 0 #888;
+      border: 1px solid #333;
+      box-shadow: 4px 4px 0 #555;
     }
 
-    .header {
-      text-align: center;
-      background: #c0c0c0;
+    .topbar {
+      background: #003366;
+      color: white;
+      font-size: 11px;
+      padding: 5px 10px;
+      text-align: right;
+    }
+
+    .store-header {
+      background: linear-gradient(#ffffff, #cccccc);
+      border-bottom: 2px solid #003366;
       padding: 12px;
-      font-weight: bold;
-      font-size: 20px;
-      border: 1px solid #777;
     }
 
-    .blink {
-      animation: blink 1s infinite;
-      color: darkred;
+    .logo {
+      font-size: 28px;
       font-weight: bold;
+      color: #003366;
+      font-family: Georgia, serif;
     }
 
-    @keyframes blink { 50% { opacity: 0; } }
+    .tagline {
+      color: #555;
+      font-size: 12px;
+    }
+
+    .promo {
+      background: #ffcc00;
+      color: #990000;
+      font-weight: bold;
+      text-align: center;
+      padding: 6px;
+      border-top: 1px solid #cc9900;
+      border-bottom: 1px solid #cc9900;
+    }
 
     .nav {
+      background: #e6e6e6;
+      padding: 7px;
+      border-bottom: 1px solid #999;
       text-align: center;
-      margin: 12px;
-      background: #efefef;
-      border: 1px solid #aaa;
-      padding: 8px;
     }
 
     .button {
       display: inline-block;
-      padding: 5px 10px;
-      margin: 5px;
+      padding: 4px 9px;
+      margin: 2px;
+      background: #f2f2f2;
       border: 2px outset #ddd;
-      background: #eeeeee;
       cursor: pointer;
-      font-size: 14px;
+      font-size: 12px;
     }
 
-    .button:active { border: 2px inset #ddd; }
+    .main {
+      display: flex;
+      padding: 10px;
+      gap: 10px;
+    }
+
+    .sidebar {
+      width: 185px;
+      background: #f0f0f0;
+      border: 1px solid #999;
+      padding: 8px;
+    }
+
+    .side-title {
+      background: #003366;
+      color: white;
+      padding: 5px;
+      font-weight: bold;
+      font-size: 12px;
+      margin: -8px -8px 8px -8px;
+    }
+
+    .side-box {
+      border: 1px solid #aaa;
+      background: white;
+      padding: 7px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
 
     .content-box {
+      flex: 1;
       border: 1px solid #999;
-      background: #fafafa;
-      padding: 15px;
-      min-height: 330px;
+      background: #fff;
+      padding: 12px;
+      min-height: 390px;
     }
 
-    .status {
-      font-family: monospace;
-      background: black;
-      color: #66ff66;
-      padding: 10px;
-      border: 1px solid #333;
-      margin: 10px 0;
-    }
-
-    .warning {
-      color: darkred;
-      font-size: 12px;
-      margin-top: 20px;
-      border-top: 1px dashed #999;
-      padding-top: 10px;
-    }
-
-    .footer {
-      font-size: 11px;
+    .deal-banner {
+      background: #cc0000;
+      color: white;
+      font-weight: bold;
+      padding: 6px;
       text-align: center;
-      margin-top: 30px;
-      color: gray;
+      margin-bottom: 10px;
     }
 
     .shop-layout {
       display: flex;
-      gap: 20px;
+      gap: 18px;
     }
 
     .product-img {
-      width: 230px;
-      height: 210px;
-      background: linear-gradient(#ddd, #aaa);
-      border: 2px solid #555;
+      width: 245px;
+      height: 235px;
+      background: linear-gradient(#eeeeee, #aaaaaa);
+      border: 1px solid #555;
       text-align: center;
       position: relative;
-      box-shadow: inset 0 0 20px #777;
+    }
+
+    .product-img:before {
+      content: "PRODUCT PHOTO";
+      display: block;
+      background: #333;
+      color: white;
+      font-size: 11px;
+      padding: 4px;
+      margin-bottom: 15px;
     }
 
     .device {
-      width: 150px;
+      width: 155px;
       height: 90px;
       background: #222;
       border-radius: 50%;
-      margin: 45px auto 10px auto;
+      margin: 35px auto 10px auto;
       border: 4px solid #666;
       box-shadow: 0 0 12px #333;
     }
@@ -127,33 +172,37 @@
     .product-label {
       font-size: 12px;
       color: #333;
-      margin-top: 8px;
+      margin-top: 12px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ff0000;
+      color: white;
+      font-weight: bold;
+      padding: 3px 6px;
+      font-size: 11px;
+      margin: 3px 0;
     }
 
     .price {
-      font-size: 24px;
-      color: darkred;
+      font-size: 26px;
+      color: #cc0000;
       font-weight: bold;
+      margin: 8px 0;
+    }
+
+    .old-price {
+      text-decoration: line-through;
+      color: #777;
+      font-size: 14px;
     }
 
     .cart-box {
       border: 1px solid #999;
-      background: #eeeeee;
-      padding: 10px;
-      margin-top: 15px;
-      font-size: 14px;
-    }
-
-    input, textarea {
-      font-family: "Times New Roman", serif;
-      padding: 5px;
-      margin: 5px 0;
-      border: 1px solid #999;
-    }
-
-    textarea {
-      width: 95%;
-      height: 80px;
+      background: #ffffcc;
+      padding: 8px;
+      margin-top: 12px;
     }
 
     .submit-btn {
@@ -161,6 +210,54 @@
       background: #eee;
       padding: 5px 12px;
       cursor: pointer;
+      margin: 3px;
+    }
+
+    .buy-btn {
+      background: #ffcc00;
+      font-weight: bold;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    td, th {
+      border: 1px solid #aaa;
+      padding: 5px;
+    }
+
+    th {
+      background: #ddd;
+    }
+
+    .status {
+      font-family: monospace;
+      background: black;
+      color: #66ff66;
+      padding: 10px;
+      border: 1px solid #333;
+      margin: 10px 0;
+    }
+
+    .warning {
+      color: darkred;
+      font-size: 12px;
+      margin: 10px;
+      border-top: 1px dashed #999;
+      padding-top: 10px;
+    }
+
+    .footer {
+      font-size: 11px;
+      text-align: center;
+      padding: 12px;
+      color: #555;
+      background: #e6e6e6;
+      border-top: 1px solid #aaa;
     }
 
     .hidden-log {
@@ -170,10 +267,28 @@
       color: #ccc;
       padding: 10px;
       display: none;
-      margin-top: 15px;
+      margin-top: 10px;
     }
 
-    .small { font-size: 12px; color: #555; }
+    input, textarea {
+      font-family: Arial, Verdana, sans-serif;
+      font-size: 12px;
+      padding: 4px;
+      border: 1px solid #999;
+    }
+
+    textarea {
+      width: 95%;
+      height: 80px;
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+      color: red;
+      font-weight: bold;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
 
     /* PAGE DE SAISIE */
     .gate {
@@ -257,13 +372,6 @@
       padding: 16px 24px;
       text-align: right;
     }
-
-    .enter-area button {
-      padding: 8px 16px;
-      border: 1px solid #555;
-      background: white;
-      cursor: pointer;
-    }
   </style>
 </head>
 
@@ -312,10 +420,19 @@
 
 <div class="container">
 
-  <div class="header">
-    Dream Entry Device (DED-01)<br>
-    Sleep Technology Division — 2005<br>
-    <span class="blink">ARCHIVED MIRROR</span>
+  <div class="topbar">
+    My Account | Order Status | Help | Secure Checkout
+  </div>
+
+  <div class="store-header">
+    <div class="logo">Dream Entry Systems Online Store</div>
+    <div class="tagline">
+      Advanced Sleep Technology Since 2001 — Official DED-01 Distributor
+    </div>
+  </div>
+
+  <div class="promo">
+    LIMITED TIME OFFER: FREE ANALOG SYNC CABLE WITH EVERY DED-01 ORDER!
   </div>
 
   <div class="nav">
@@ -327,14 +444,49 @@
     <span class="button" onclick="showPage('logs')">System Logs</span>
   </div>
 
-  <div id="content" class="content-box"></div>
+  <div class="main">
+    <div class="sidebar">
+      <div class="side-title">Departments</div>
+      <div class="side-box">
+        <a onclick="showPage('buy')">Sleep Interfaces</a><br>
+        <a onclick="showPage('info')">Research Devices</a><br>
+        <a onclick="showPage('manual')">Accessories</a><br>
+        <a onclick="showPage('support')">Replacement Pads</a><br>
+        <a onclick="showPage('logs')">Clearance</a>
+      </div>
+
+      <div class="side-title">Shopping Cart</div>
+      <div class="side-box">
+        Items: <span id="sideQty">0</span><br>
+        Total: $<span id="sideTotal">0.00</span><br>
+        <button class="submit-btn" onclick="showPage('buy')">View Cart</button>
+      </div>
+
+      <div class="side-title">Security</div>
+      <div class="side-box">
+        🔒 DreamPay 1.2<br>
+        128-bit SSL<br>
+        Certificate expires:<br>
+        <b>11/12/2005</b>
+      </div>
+
+      <div class="side-title">Customer Notice</div>
+      <div class="side-box">
+        <span class="blink">RECALL NOTICE ACTIVE</span><br>
+        Some units may remain connected after shutdown.
+      </div>
+    </div>
+
+    <div id="content" class="content-box"></div>
+  </div>
 
   <div class="warning">
     Some users have reported extended dream retention periods after repeated use.
   </div>
 
   <div class="footer">
-    © 2005 Dream Entry Systems Inc. — Archived copy<br>
+    © 2005 Dream Entry Systems Inc. — Archived Storefront<br>
+    Visa | MasterCard | DreamPay | Wire Transfer<br>
     Visitor count: <span id="counter">000001</span>
   </div>
 
@@ -355,87 +507,118 @@ function showPage(page) {
 
   if (page === "home") {
     content.innerHTML = `
-      <h2>Welcome</h2>
-      <p>Welcome to the official distribution page of the Dream Entry Device (DED-01).</p>
+      <div class="deal-banner">WELCOME TO OUR OFFICIAL ONLINE STORE</div>
 
-      <p>
-        The DED-01 is a cranial sleep interface designed to allow controlled access
-        to structured dream environments known as <b>"Wonderlands Instances"</b>.
-      </p>
+      <h2>Featured Product</h2>
 
-      <p>Developed between 2001 and 2005 under private research agreements.</p>
+      <div class="shop-layout">
+        <div class="product-img">
+          <div class="device"><div class="device-line"></div></div>
+          <div class="product-label">DED-01 Cranial Sleep Interface</div>
+        </div>
 
-      <h3>System Status</h3>
-      <div class="status">
-        ONLINE (maintenance mode active)<br>
-        Last update: 12/11/2005<br>
-        Current node: ARCHIVE-03<br>
-        Dream sync: unstable
+        <div>
+          <span class="badge">BEST SELLER</span>
+          <span class="badge">NEW FOR 2005</span>
+
+          <h3>Dream Entry Device DED-01</h3>
+
+          <p>
+            The official cranial sleep interface for structured dream environment access.
+            Designed for private research, therapeutic exploration, and controlled
+            subconscious navigation.
+          </p>
+
+          <p>
+            <span class="old-price">$3,199.99</span><br>
+            <span class="price">$2,499.99</span>
+          </p>
+
+          <button class="submit-btn buy-btn" onclick="showPage('buy')">View Product Details</button>
+        </div>
       </div>
 
-      <p class="small">Best viewed with Internet Explorer 6.0 or Netscape Navigator.</p>
+      <h3>Store Status</h3>
+      <div class="status">
+        ONLINE STORE: MAINTENANCE MODE<br>
+        ORDER SYSTEM: PARTIAL<br>
+        PAYMENT GATEWAY: EXPIRED<br>
+        ARCHIVE NODE: DES-STORE-03
+      </div>
     `;
   }
 
   if (page === "buy") {
     content.innerHTML = `
-      <h2>Buy Dream Entry Device DED-01</h2>
+      <div class="deal-banner">DED-01 PRODUCT ORDER PAGE</div>
 
       <div class="shop-layout">
         <div>
           <div class="product-img">
-            <div class="device">
-              <div class="device-line"></div>
-            </div>
+            <div class="device"><div class="device-line"></div></div>
             <div class="product-label">DED-01 Cranial Sleep Interface</div>
-            <div class="small">Image may differ from final product.</div>
           </div>
+
+          <p class="small">
+            Click image to enlarge — image unavailable in archived mode.
+          </p>
         </div>
 
         <div>
-          <h3>Dream Entry Device — DED-01</h3>
+          <h2>Dream Entry Device — DED-01</h2>
+          <span class="badge">LIMITED STOCK</span>
+          <span class="badge">FACTORY SEALED</span>
 
           <p>
-            Private sleep interface system for structured dream environment access.
-            Includes control unit, cranial pads, analog sync cable and printed user manual.
+            Private sleep interface system for controlled access to structured dream environments.
           </p>
 
-          <p class="price">$2,499.99</p>
+          <p>
+            <span class="old-price">List Price: $3,199.99</span><br>
+            <span class="price">Our Price: $2,499.99</span><br>
+            You save: $700.00
+          </p>
 
           <p>
-            <b>Availability:</b> <span style="color:darkred;">RECALLED / LIMITED STOCK</span><br>
-            <b>Condition:</b> Factory sealed<br>
+            <b>Availability:</b> <span style="color:darkred;">RECALLED</span><br>
+            <b>Ships from:</b> New Jersey Research Warehouse<br>
             <b>Shipping:</b> 6–8 weeks<br>
             <b>Warranty:</b> void after first sleep cycle
           </p>
 
-          <button class="submit-btn" onclick="addToCart()">Add to Cart</button>
-          <button class="submit-btn" onclick="checkout()">Checkout</button>
+          <button class="submit-btn buy-btn" onclick="addToCart()">ADD TO CART</button>
+          <button class="submit-btn" onclick="checkout()">PROCEED TO CHECKOUT</button>
 
           <div class="cart-box">
-            <b>Shopping Cart</b><br>
-            Items: <span id="cartQty">0</span><br>
-            Total: $<span id="cartTotal">0.00</span>
+            <b>Your Shopping Cart</b><br>
+            DED-01 quantity: <span id="cartQty">0</span><br>
+            Subtotal: $<span id="cartTotal">0.00</span>
           </div>
 
           <div id="checkout-message" class="hidden-log"></div>
         </div>
       </div>
 
-      <p class="small">
-        Secure checkout powered by DreamPay 1.2. SSL certificate expired 11/12/2005.
-      </p>
+      <h3>Technical Specifications</h3>
+      <table>
+        <tr><th>Feature</th><th>Specification</th></tr>
+        <tr><td>Model</td><td>DED-01</td></tr>
+        <tr><td>Interface</td><td>Cranial contact array</td></tr>
+        <tr><td>Session limit</td><td>43 minutes</td></tr>
+        <tr><td>Supported instances</td><td>W-01 to W-04</td></tr>
+        <tr><td>Power</td><td>110V bedside control unit</td></tr>
+      </table>
     `;
     updateCart();
   }
 
   if (page === "info") {
     content.innerHTML = `
-      <h2>Product Info</h2>
+      <h2>Product Information</h2>
 
       <p>
-        The Dream Entry Device DED-01 was designed for private sleep research,
-        sensory mapping, and controlled subconscious navigation.
+        The Dream Entry Device DED-01 was developed between 2001 and 2005 under
+        private research agreements.
       </p>
 
       <ul>
@@ -446,10 +629,6 @@ function showPage(page) {
       </ul>
 
       <p><b>Warning:</b> do not use the device for more than 43 minutes per session.</p>
-
-      <p class="small">
-        Product distribution was suspended after the November 2005 recall notice.
-      </p>
     `;
   }
 
@@ -457,20 +636,12 @@ function showPage(page) {
     content.innerHTML = `
       <h2>User Manual</h2>
 
-      <h3>Startup Procedure</h3>
       <ol>
         <li>Connect DED-01 to the bedside power unit.</li>
         <li>Attach cranial contact pads to the temples.</li>
         <li>Wait for the blue READY indicator.</li>
         <li>Press INITIATE before entering sleep state.</li>
       </ol>
-
-      <h3>Known Errors</h3>
-      <ul>
-        <li>ERR-04: user wake cycle delayed</li>
-        <li>ERR-17: duplicate dream layer detected</li>
-        <li>ERR-22: unauthorized Wonderland Instance</li>
-      </ul>
 
       <p><a onclick="revealManualNote()">Click here for archived addendum.</a></p>
 
@@ -484,17 +655,17 @@ function showPage(page) {
 
   if (page === "support") {
     content.innerHTML = `
-      <h2>Support</h2>
+      <h2>Customer Support</h2>
 
       <p>Support services for Dream Entry Systems products are no longer available.</p>
 
       <form onsubmit="sendSupport(); return false;">
-        <label>Name:</label><br>
-        <input type="text" id="name" placeholder="Enter name"><br>
-
-        <label>Issue:</label><br>
-        <textarea id="issue" placeholder="Describe your issue"></textarea><br>
-
+        Name:<br>
+        <input type="text"><br>
+        Order Number:<br>
+        <input type="text" placeholder="DES-ORDER-"><br>
+        Issue:<br>
+        <textarea></textarea><br>
         <button class="submit-btn" type="submit">Submit Ticket</button>
       </form>
 
@@ -513,7 +684,6 @@ function showPage(page) {
         [12/11/2005 03:47] DED-01 signal detected<br>
         [12/11/2005 03:48] WARNING: user not located<br>
         [12/11/2005 03:49] Wonderland Instance W-04 still active<br>
-        [12/11/2005 03:50] Connection terminated by remote host
       </div>
 
       <p><a onclick="revealSecretLog()">View corrupted entry</a></p>
@@ -535,13 +705,15 @@ function addToCart() {
 }
 
 function updateCart() {
-  const qty = document.getElementById("cartQty");
-  const total = document.getElementById("cartTotal");
+  const cartQtyEl = document.getElementById("cartQty");
+  const cartTotalEl = document.getElementById("cartTotal");
+  const sideQtyEl = document.getElementById("sideQty");
+  const sideTotalEl = document.getElementById("sideTotal");
 
-  if (qty && total) {
-    qty.innerText = cartQty;
-    total.innerText = (cartQty * unitPrice).toFixed(2);
-  }
+  if (cartQtyEl) cartQtyEl.innerText = cartQty;
+  if (cartTotalEl) cartTotalEl.innerText = (cartQty * unitPrice).toFixed(2);
+  if (sideQtyEl) sideQtyEl.innerText = cartQty;
+  if (sideTotalEl) sideTotalEl.innerText = (cartQty * unitPrice).toFixed(2);
 }
 
 function checkout() {
@@ -553,9 +725,10 @@ function checkout() {
   } else {
     msg.innerHTML = `
       Connecting to DreamPay 1.2...<br>
-      Verifying product availability...<br>
-      ERROR: Transaction blocked.<br><br>
-      Recall notice active: DED-01 units cannot be legally distributed after 12/11/2005.<br>
+      Verifying SSL certificate...<br>
+      Verifying product availability...<br><br>
+      ERROR: Transaction blocked.<br>
+      Recall notice active: DED-01 units cannot be legally distributed after 12/11/2005.<br><br>
       Cart reference saved: ORDER-DED-${Math.floor(Math.random() * 90000) + 10000}
     `;
   }
