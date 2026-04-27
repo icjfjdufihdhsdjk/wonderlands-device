@@ -7,46 +7,80 @@
   <style>
     body {
       margin: 0;
-      background-color: #dcdcdc;
+      background: #dcdcdc url("data:image/gif;base64,R0lGODlhAwADAIAAAP///8zMzCH5BAAAAAAALAAAAAADAAMAAAIDhI9WADs=");
       font-family: "Times New Roman", serif;
       color: black;
     }
 
+    a {
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
     .container {
-      width: 800px;
+      width: 820px;
       margin: 25px auto;
       background: #ffffff;
       border: 2px solid black;
       padding: 20px;
+      box-shadow: 4px 4px 0 #888;
     }
 
     .header {
       text-align: center;
       background: #c0c0c0;
-      padding: 10px;
+      padding: 12px;
       font-weight: bold;
       font-size: 20px;
+      border: 1px solid #777;
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+      color: darkred;
+      font-weight: bold;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
     }
 
     .nav {
       text-align: center;
-      margin: 10px;
+      margin: 12px;
+      background: #efefef;
+      border: 1px solid #aaa;
+      padding: 8px;
     }
 
     .button {
       display: inline-block;
       padding: 5px 10px;
       margin: 5px;
-      border: 1px solid black;
+      border: 2px outset #ddd;
       background: #eeeeee;
       cursor: pointer;
       font-size: 14px;
+    }
+
+    .button:active {
+      border: 2px inset #ddd;
+    }
+
+    .content-box {
+      border: 1px solid #999;
+      background: #fafafa;
+      padding: 15px;
+      min-height: 280px;
     }
 
     .warning {
       color: darkred;
       font-size: 12px;
       margin-top: 20px;
+      border-top: 1px dashed #999;
+      padding-top: 10px;
     }
 
     .footer {
@@ -54,6 +88,49 @@
       text-align: center;
       margin-top: 30px;
       color: gray;
+    }
+
+    .status {
+      font-family: monospace;
+      background: black;
+      color: #66ff66;
+      padding: 10px;
+      border: 1px solid #333;
+      margin: 10px 0;
+    }
+
+    .small {
+      font-size: 12px;
+      color: #555;
+    }
+
+    input, textarea {
+      font-family: "Times New Roman", serif;
+      width: 95%;
+      padding: 5px;
+      margin: 5px 0;
+      border: 1px solid #999;
+    }
+
+    textarea {
+      height: 80px;
+    }
+
+    .submit-btn {
+      border: 2px outset #ddd;
+      background: #eee;
+      padding: 5px 12px;
+      cursor: pointer;
+    }
+
+    .hidden-log {
+      font-family: monospace;
+      font-size: 12px;
+      background: #111;
+      color: #ccc;
+      padding: 10px;
+      display: none;
+      margin-top: 15px;
     }
 
     /* PAGE DE SAISIE */
@@ -115,7 +192,6 @@
       font-size: 22px;
       font-weight: bold;
       margin-bottom: 18px;
-      color: #1a1a1a;
     }
 
     .case-info {
@@ -153,10 +229,6 @@
       cursor: pointer;
       font-size: 13px;
     }
-
-    .enter-area button:hover {
-      background: #e0e0e0;
-    }
   </style>
 </head>
 
@@ -164,7 +236,6 @@
 
 <div id="gate" class="gate">
   <div class="seizure-box">
-
     <div class="official-top">
       <div class="flag-line">
         <div class="flag-blue"></div>
@@ -172,29 +243,17 @@
         <div class="flag-red"></div>
       </div>
 
-      <div class="official-title">
-        République française
-      </div>
-      <div class="official-subtitle">
-        Notification administrative de restriction d’accès
-      </div>
+      <div class="official-title">République française</div>
+      <div class="official-subtitle">Notification administrative de restriction d’accès</div>
     </div>
 
     <div class="notice-content">
-      <div class="notice-heading">
-        Accès au domaine temporairement restreint
-      </div>
+      <div class="notice-heading">Accès au domaine temporairement restreint</div>
 
       <p>
         Ce domaine a fait l’objet d’une mesure de restriction dans le cadre d’une procédure
         de coopération internationale relative à la diffusion de dispositifs expérimentaux
         non homologués.
-      </p>
-
-      <p>
-        Les contenus précédemment accessibles sur ce serveur sont conservés à des fins
-        d’analyse technique. Toute consultation peut être enregistrée dans les journaux
-        d’accès du système.
       </p>
 
       <div class="case-info">
@@ -204,9 +263,7 @@
         <div><b>Objet :</b> Dream Entry Device — DED-01</div>
       </div>
 
-      <p>
-        L’accès aux archives publiques du domaine reste possible pour consultation.
-      </p>
+      <p>L’accès aux archives publiques du domaine reste possible pour consultation.</p>
 
       <div class="legal-note">
         Cette page est une notification automatisée. Aucun support utilisateur n’est assuré
@@ -217,7 +274,6 @@
     <div class="enter-area">
       <button onclick="enterSite()">Consulter les archives</button>
     </div>
-
   </div>
 </div>
 
@@ -225,43 +281,27 @@
 
   <div class="header">
     Dream Entry Device (DED-01)<br>
-    Sleep Technology Division — 2005
+    Sleep Technology Division — 2005<br>
+    <span class="blink">ARCHIVED MIRROR</span>
   </div>
 
   <div class="nav">
-    <span class="button">Buy Now</span>
-    <span class="button">Product Info</span>
-    <span class="button">User Manual</span>
-    <span class="button">Support</span>
+    <span class="button" onclick="showPage('home')">Home</span>
+    <span class="button" onclick="showPage('info')">Product Info</span>
+    <span class="button" onclick="showPage('manual')">User Manual</span>
+    <span class="button" onclick="showPage('support')">Support</span>
+    <span class="button" onclick="showPage('logs')">System Logs</span>
   </div>
 
-  <h2>Welcome</h2>
-
-  <p>
-    Welcome to the official distribution page of the Dream Entry Device (DED-01).
-  </p>
-
-  <p>
-    The DED-01 is a cranial sleep interface designed to allow controlled access to structured dream environments known as <b>"Wonderlands Instances"</b>.
-  </p>
-
-  <p>
-    Developed between 2001 and 2005 under private research agreements.
-  </p>
-
-  <h3>System Status</h3>
-
-  <p>
-    ONLINE (maintenance mode active)<br>
-    Last update: 12/11/2005
-  </p>
+  <div id="content" class="content-box"></div>
 
   <div class="warning">
     Some users have reported extended dream retention periods after repeated use.
   </div>
 
   <div class="footer">
-    © 2005 Dream Entry Systems Inc. — All rights reserved.
+    © 2005 Dream Entry Systems Inc. — Archived copy<br>
+    Visitor count: <span id="counter">000001</span>
   </div>
 
 </div>
@@ -269,6 +309,169 @@
 <script>
 function enterSite() {
   document.getElementById("gate").style.display = "none";
+  showPage("home");
+  startCounter();
+}
+
+function showPage(page) {
+  const content = document.getElementById("content");
+
+  if (page === "home") {
+    content.innerHTML = `
+      <h2>Welcome</h2>
+      <p>Welcome to the official distribution page of the Dream Entry Device (DED-01).</p>
+
+      <p>
+        The DED-01 is a cranial sleep interface designed to allow controlled access
+        to structured dream environments known as <b>"Wonderlands Instances"</b>.
+      </p>
+
+      <p>Developed between 2001 and 2005 under private research agreements.</p>
+
+      <h3>System Status</h3>
+      <div class="status">
+        ONLINE (maintenance mode active)<br>
+        Last update: 12/11/2005<br>
+        Current node: ARCHIVE-03<br>
+        Dream sync: unstable
+      </div>
+
+      <p class="small">
+        Best viewed with Internet Explorer 6.0 or Netscape Navigator.
+      </p>
+    `;
+  }
+
+  if (page === "info") {
+    content.innerHTML = `
+      <h2>Product Info</h2>
+
+      <p>
+        The Dream Entry Device DED-01 was designed for private sleep research,
+        sensory mapping, and controlled subconscious navigation.
+      </p>
+
+      <ul>
+        <li>Cranial sleep interface</li>
+        <li>Passive dream environment mapping</li>
+        <li>Memory echo stabilization</li>
+        <li>Low-frequency neural rhythm detection</li>
+      </ul>
+
+      <p><b>Warning:</b> do not use the device for more than 43 minutes per session.</p>
+
+      <p class="small">
+        Product distribution was suspended after the November 2005 recall notice.
+      </p>
+    `;
+  }
+
+  if (page === "manual") {
+    content.innerHTML = `
+      <h2>User Manual</h2>
+
+      <h3>Startup Procedure</h3>
+      <ol>
+        <li>Connect DED-01 to the bedside power unit.</li>
+        <li>Attach cranial contact pads to the temples.</li>
+        <li>Wait for the blue READY indicator.</li>
+        <li>Press INITIATE before entering sleep state.</li>
+      </ol>
+
+      <h3>Known Errors</h3>
+      <ul>
+        <li>ERR-04: user wake cycle delayed</li>
+        <li>ERR-17: duplicate dream layer detected</li>
+        <li>ERR-22: unauthorized Wonderland Instance</li>
+      </ul>
+
+      <p>
+        <a onclick="revealManualNote()">Click here for archived addendum.</a>
+      </p>
+
+      <div id="manual-note" class="hidden-log">
+        ADDENDUM 12/11/2005<br>
+        Do not reconnect recovered DED-01 units.<br>
+        Instance W-04 continues to respond without active user input.
+      </div>
+    `;
+  }
+
+  if (page === "support") {
+    content.innerHTML = `
+      <h2>Support</h2>
+
+      <p>
+        Support services for Dream Entry Systems products are no longer available.
+      </p>
+
+      <form onsubmit="sendSupport(); return false;">
+        <label>Name:</label><br>
+        <input type="text" id="name" placeholder="Enter name"><br>
+
+        <label>Issue:</label><br>
+        <textarea id="issue" placeholder="Describe your issue"></textarea><br>
+
+        <button class="submit-btn" type="submit">Submit Ticket</button>
+      </form>
+
+      <div id="support-response" class="hidden-log"></div>
+    `;
+  }
+
+  if (page === "logs") {
+    content.innerHTML = `
+      <h2>System Logs</h2>
+
+      <div class="status">
+        [12/11/2005 03:12] Archive mode enabled<br>
+        [12/11/2005 03:14] Product pages locked<br>
+        [12/11/2005 03:21] External access restricted<br>
+        [12/11/2005 03:47] DED-01 signal detected<br>
+        [12/11/2005 03:48] WARNING: user not located<br>
+        [12/11/2005 03:49] Wonderland Instance W-04 still active<br>
+        [12/11/2005 03:50] Connection terminated by remote host
+      </div>
+
+      <p>
+        <a onclick="revealSecretLog()">View corrupted entry</a>
+      </p>
+
+      <div id="secret-log" class="hidden-log">
+        [CORRUPTED]<br>
+        user_id: NULL<br>
+        sleep_state: ACTIVE<br>
+        wake_state: FAILED<br>
+        message: "he is still inside"
+      </div>
+    `;
+  }
+}
+
+function revealManualNote() {
+  document.getElementById("manual-note").style.display = "block";
+}
+
+function revealSecretLog() {
+  document.getElementById("secret-log").style.display = "block";
+}
+
+function sendSupport() {
+  const response = document.getElementById("support-response");
+  response.style.display = "block";
+  response.innerHTML = `
+    Ticket submission failed.<br>
+    Error: support server unavailable since 12/11/2005.<br>
+    Last known operator: M. HART / DREAM ENTRY SYSTEMS
+  `;
+}
+
+function startCounter() {
+  let count = Math.floor(Math.random() * 9000) + 1000;
+  setInterval(function() {
+    count++;
+    document.getElementById("counter").innerText = String(count).padStart(6, "0");
+  }, 3000);
 }
 </script>
 
