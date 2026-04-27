@@ -48,14 +48,6 @@
       font-family: Georgia, serif;
     }
 
-    .secret-entry {
-      cursor: pointer;
-    }
-
-    .secret-entry:hover {
-      color: #990000;
-    }
-
     .tagline {
       color: #555;
       font-size: 12px;
@@ -226,6 +218,22 @@
       font-weight: bold;
     }
 
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    td, th {
+      border: 1px solid #aaa;
+      padding: 5px;
+    }
+
+    th {
+      background: #ddd;
+    }
+
     .status {
       font-family: monospace;
       background: black;
@@ -262,41 +270,112 @@
       margin-top: 10px;
     }
 
-    /* GLITCH */
-    .glitch-screen {
+    input, textarea {
+      font-family: Arial, Verdana, sans-serif;
+      font-size: 12px;
+      padding: 4px;
+      border: 1px solid #999;
+    }
+
+    textarea {
+      width: 95%;
+      height: 80px;
+    }
+
+    .blink {
+      animation: blink 1s infinite;
+      color: red;
+      font-weight: bold;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* PAGE DE SAISIE */
+    .gate {
       position: fixed;
       inset: 0;
-      background: black;
-      z-index: 99999;
-      display: none;
-      overflow: hidden;
+      background: #f4f4f4;
+      color: #111;
+      z-index: 9999;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
-    .glitch-text {
-      position: absolute;
-      color: white;
-      font-family: monospace;
-      background: black;
-      padding: 3px;
+    .seizure-box {
+      width: 720px;
+      background: white;
+      border: 1px solid #9a9a9a;
+      box-shadow: 0 0 18px rgba(0,0,0,0.25);
     }
 
-    .final-glitch {
-      color: white;
-      text-align: center;
-      margin-top: 20%;
-      font-family: monospace;
+    .official-top {
+      border-top: 8px solid #002654;
+      padding: 18px 24px;
+      border-bottom: 1px solid #ccc;
     }
 
-    .final-glitch span {
-      color: red;
-      font-size: 20px;
+    .flag-line { display: flex; height: 6px; margin-bottom: 18px; }
+    .flag-blue { background: #002654; flex: 1; }
+    .flag-white { background: white; flex: 1; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+    .flag-red { background: #ce1126; flex: 1; }
+
+    .official-title {
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .official-subtitle {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .notice-content {
+      padding: 24px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .notice-heading {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 18px;
+    }
+
+    .case-info {
+      background: #f1f1f1;
+      border-left: 4px solid #002654;
+      padding: 12px;
+      margin: 18px 0;
+      font-size: 13px;
+    }
+
+    .case-info b {
+      display: inline-block;
+      width: 130px;
+    }
+
+    .legal-note {
+      font-size: 12px;
+      color: #555;
+      border-top: 1px solid #ddd;
+      margin-top: 22px;
+      padding-top: 12px;
+    }
+
+    .enter-area {
+      background: #eeeeee;
+      border-top: 1px solid #ccc;
+      padding: 16px 24px;
+      text-align: right;
     }
   </style>
 </head>
 
 <body>
-
-<div id="glitchScreen" class="glitch-screen"></div>
 
 <div id="gate" class="gate">
   <div class="seizure-box">
@@ -312,7 +391,25 @@
 
     <div class="notice-content">
       <div class="notice-heading">Accès au domaine temporairement restreint</div>
-      <p>Ce domaine a fait l’objet d’une mesure de restriction...</p>
+
+      <p>
+        Ce domaine a fait l’objet d’une mesure de restriction dans le cadre d’une procédure
+        de coopération internationale relative à la diffusion de dispositifs expérimentaux
+        non homologués.
+      </p>
+
+      <div class="case-info">
+        <div><b>Référence :</b> INT-FR/DED-01/2005-11</div>
+        <div><b>Statut :</b> Conservation technique</div>
+        <div><b>Dernière action :</b> 12/11/2005</div>
+        <div><b>Objet :</b> Dream Entry Device — DED-01</div>
+      </div>
+
+      <p>L’accès aux archives publiques du domaine reste possible pour consultation.</p>
+
+      <div class="legal-note">
+        Cette page est une notification automatisée. Aucun support utilisateur n’est assuré.
+      </div>
     </div>
 
     <div class="enter-area">
@@ -323,75 +420,344 @@
 
 <div class="container">
 
-<div class="topbar">My Account | Order Status | Help | Secure Checkout</div>
-
-<div class="store-header">
-  <div class="logo">
-    Dream <span class="secret-entry" onclick="startDreamGlitch()">Entry</span> Systems Online Store
-  </div>
-</div>
-
-<div class="nav">
-  <span class="button" onclick="showPage('home')">Home</span>
-  <span class="button" onclick="showPage('buy')">Buy Now</span>
-</div>
-
-<div class="main">
-  <div class="sidebar">
-    Items: <span id="sideQty">0</span><br>
-    Total: $<span id="sideTotal">0.00</span>
+  <div class="topbar">
+    My Account | Order Status | Help | Secure Checkout
   </div>
 
-  <div id="content" class="content-box"></div>
-</div>
+  <div class="store-header">
+    <div class="logo">Dream Entry Systems Online Store</div>
+    <div class="tagline">
+      Advanced Sleep Technology Since 2001 — Official DED-01 Distributor
+    </div>
+  </div>
 
-<div class="footer">© 2005 Dream Entry Systems</div>
+  <div class="promo">
+    LIMITED TIME OFFER: FREE ANALOG SYNC CABLE WITH EVERY DED-01 ORDER!
+  </div>
+
+  <div class="nav">
+    <span class="button" onclick="showPage('home')">Home</span>
+    <span class="button" onclick="showPage('buy')">Buy Now</span>
+    <span class="button" onclick="showPage('info')">Product Info</span>
+    <span class="button" onclick="showPage('manual')">User Manual</span>
+    <span class="button" onclick="showPage('support')">Support</span>
+    <span class="button" onclick="showPage('logs')">System Logs</span>
+  </div>
+
+  <div class="main">
+    <div class="sidebar">
+      <div class="side-title">Departments</div>
+      <div class="side-box">
+        <a onclick="showPage('buy')">Sleep Interfaces</a><br>
+        <a onclick="showPage('info')">Research Devices</a><br>
+        <a onclick="showPage('manual')">Accessories</a><br>
+        <a onclick="showPage('support')">Replacement Pads</a><br>
+        <a onclick="showPage('logs')">Clearance</a>
+      </div>
+
+      <div class="side-title">Shopping Cart</div>
+      <div class="side-box">
+        Items: <span id="sideQty">0</span><br>
+        Total: $<span id="sideTotal">0.00</span><br>
+        <button class="submit-btn" onclick="showPage('buy')">View Cart</button>
+      </div>
+
+      <div class="side-title">Security</div>
+      <div class="side-box">
+        🔒 DreamPay 1.2<br>
+        128-bit SSL<br>
+        Certificate expires:<br>
+        <b>11/12/2005</b>
+      </div>
+
+      <div class="side-title">Customer Notice</div>
+      <div class="side-box">
+        <span class="blink">RECALL NOTICE ACTIVE</span><br>
+        Some units may remain connected after shutdown.
+      </div>
+    </div>
+
+    <div id="content" class="content-box"></div>
+  </div>
+
+  <div class="warning">
+    Some users have reported extended dream retention periods after repeated use.
+  </div>
+
+  <div class="footer">
+    © 2005 Dream Entry Systems Inc. — Archived Storefront<br>
+    Visa | MasterCard | DreamPay | Wire Transfer<br>
+    Visitor count: <span id="counter">000001</span>
+  </div>
 
 </div>
 
 <script>
-function startDreamGlitch(){
-  const screen=document.getElementById("glitchScreen");
-  screen.style.display="block";
+let cartQty = 0;
+const unitPrice = 2499.99;
 
-  const messages=[
-    "CONNECTING TO WONDERLAND...",
-    "DREAM LAYER DETECTED",
-    "W-04 ACTIVE",
-    "USER STILL DREAMING",
-    "EXIT FAILED",
-    "THE DREAM REMEMBERS YOU"
-  ];
-
-  let c=0;
-
-  let i=setInterval(()=>{
-    screen.innerHTML="";
-
-    for(let j=0;j<20;j++){
-      let d=document.createElement("div");
-      d.className="glitch-text";
-      d.innerText=messages[Math.floor(Math.random()*messages.length)];
-      d.style.left=Math.random()*window.innerWidth+"px";
-      d.style.top=Math.random()*window.innerHeight+"px";
-      screen.appendChild(d);
-    }
-
-    c++;
-
-    if(c>15){
-      clearInterval(i);
-      screen.innerHTML=`
-      <div class="final-glitch">
-      <span>YOU ARE STILL INSIDE</span><br><br>
-      <button onclick="closeDreamGlitch()">RETURN</button>
-      </div>`;
-    }
-  },100);
+function enterSite() {
+  document.getElementById("gate").style.display = "none";
+  showPage("home");
+  startCounter();
 }
 
-function closeDreamGlitch(){
-  document.getElementById("glitchScreen").style.display="none";
+function showPage(page) {
+  const content = document.getElementById("content");
+
+  if (page === "home") {
+    content.innerHTML = `
+      <div class="deal-banner">WELCOME TO OUR OFFICIAL ONLINE STORE</div>
+
+      <h2>Featured Product</h2>
+
+      <div class="shop-layout">
+        <div class="product-img">
+          <div class="device"><div class="device-line"></div></div>
+          <div class="product-label">DED-01 Cranial Sleep Interface</div>
+        </div>
+
+        <div>
+          <span class="badge">BEST SELLER</span>
+          <span class="badge">NEW FOR 2005</span>
+
+          <h3>Dream Entry Device DED-01</h3>
+
+          <p>
+            The official cranial sleep interface for structured dream environment access.
+            Designed for private research, therapeutic exploration, and controlled
+            subconscious navigation.
+          </p>
+
+          <p>
+            <span class="old-price">$3,199.99</span><br>
+            <span class="price">$2,499.99</span>
+          </p>
+
+          <button class="submit-btn buy-btn" onclick="showPage('buy')">View Product Details</button>
+        </div>
+      </div>
+
+      <h3>Store Status</h3>
+      <div class="status">
+        ONLINE STORE: MAINTENANCE MODE<br>
+        ORDER SYSTEM: PARTIAL<br>
+        PAYMENT GATEWAY: EXPIRED<br>
+        ARCHIVE NODE: DES-STORE-03
+      </div>
+    `;
+  }
+
+  if (page === "buy") {
+    content.innerHTML = `
+      <div class="deal-banner">DED-01 PRODUCT ORDER PAGE</div>
+
+      <div class="shop-layout">
+        <div>
+          <div class="product-img">
+            <div class="device"><div class="device-line"></div></div>
+            <div class="product-label">DED-01 Cranial Sleep Interface</div>
+          </div>
+
+          <p class="small">
+            Click image to enlarge — image unavailable in archived mode.
+          </p>
+        </div>
+
+        <div>
+          <h2>Dream Entry Device — DED-01</h2>
+          <span class="badge">LIMITED STOCK</span>
+          <span class="badge">FACTORY SEALED</span>
+
+          <p>
+            Private sleep interface system for controlled access to structured dream environments.
+          </p>
+
+          <p>
+            <span class="old-price">List Price: $3,199.99</span><br>
+            <span class="price">Our Price: $2,499.99</span><br>
+            You save: $700.00
+          </p>
+
+          <p>
+            <b>Availability:</b> <span style="color:darkred;">RECALLED</span><br>
+            <b>Ships from:</b> New Jersey Research Warehouse<br>
+            <b>Shipping:</b> 6–8 weeks<br>
+            <b>Warranty:</b> void after first sleep cycle
+          </p>
+
+          <button class="submit-btn buy-btn" onclick="addToCart()">ADD TO CART</button>
+          <button class="submit-btn" onclick="checkout()">PROCEED TO CHECKOUT</button>
+
+          <div class="cart-box">
+            <b>Your Shopping Cart</b><br>
+            DED-01 quantity: <span id="cartQty">0</span><br>
+            Subtotal: $<span id="cartTotal">0.00</span>
+          </div>
+
+          <div id="checkout-message" class="hidden-log"></div>
+        </div>
+      </div>
+
+      <h3>Technical Specifications</h3>
+      <table>
+        <tr><th>Feature</th><th>Specification</th></tr>
+        <tr><td>Model</td><td>DED-01</td></tr>
+        <tr><td>Interface</td><td>Cranial contact array</td></tr>
+        <tr><td>Session limit</td><td>43 minutes</td></tr>
+        <tr><td>Supported instances</td><td>W-01 to W-04</td></tr>
+        <tr><td>Power</td><td>110V bedside control unit</td></tr>
+      </table>
+    `;
+    updateCart();
+  }
+
+  if (page === "info") {
+    content.innerHTML = `
+      <h2>Product Information</h2>
+
+      <p>
+        The Dream Entry Device DED-01 was developed between 2001 and 2005 under
+        private research agreements.
+      </p>
+
+      <ul>
+        <li>Cranial sleep interface</li>
+        <li>Passive dream environment mapping</li>
+        <li>Memory echo stabilization</li>
+        <li>Low-frequency neural rhythm detection</li>
+      </ul>
+
+      <p><b>Warning:</b> do not use the device for more than 43 minutes per session.</p>
+    `;
+  }
+
+  if (page === "manual") {
+    content.innerHTML = `
+      <h2>User Manual</h2>
+
+      <ol>
+        <li>Connect DED-01 to the bedside power unit.</li>
+        <li>Attach cranial contact pads to the temples.</li>
+        <li>Wait for the blue READY indicator.</li>
+        <li>Press INITIATE before entering sleep state.</li>
+      </ol>
+
+      <p><a onclick="revealManualNote()">Click here for archived addendum.</a></p>
+
+      <div id="manual-note" class="hidden-log">
+        ADDENDUM 12/11/2005<br>
+        Do not reconnect recovered DED-01 units.<br>
+        Instance W-04 continues to respond without active user input.
+      </div>
+    `;
+  }
+
+  if (page === "support") {
+    content.innerHTML = `
+      <h2>Customer Support</h2>
+
+      <p>Support services for Dream Entry Systems products are no longer available.</p>
+
+      <form onsubmit="sendSupport(); return false;">
+        Name:<br>
+        <input type="text"><br>
+        Order Number:<br>
+        <input type="text" placeholder="DES-ORDER-"><br>
+        Issue:<br>
+        <textarea></textarea><br>
+        <button class="submit-btn" type="submit">Submit Ticket</button>
+      </form>
+
+      <div id="support-response" class="hidden-log"></div>
+    `;
+  }
+
+  if (page === "logs") {
+    content.innerHTML = `
+      <h2>System Logs</h2>
+
+      <div class="status">
+        [12/11/2005 03:12] Archive mode enabled<br>
+        [12/11/2005 03:14] Product pages locked<br>
+        [12/11/2005 03:21] External access restricted<br>
+        [12/11/2005 03:47] DED-01 signal detected<br>
+        [12/11/2005 03:48] WARNING: user not located<br>
+        [12/11/2005 03:49] Wonderland Instance W-04 still active<br>
+      </div>
+
+      <p><a onclick="revealSecretLog()">View corrupted entry</a></p>
+
+      <div id="secret-log" class="hidden-log">
+        [CORRUPTED]<br>
+        user_id: NULL<br>
+        sleep_state: ACTIVE<br>
+        wake_state: FAILED<br>
+        message: "he is still inside"
+      </div>
+    `;
+  }
+}
+
+function addToCart() {
+  cartQty++;
+  updateCart();
+}
+
+function updateCart() {
+  const cartQtyEl = document.getElementById("cartQty");
+  const cartTotalEl = document.getElementById("cartTotal");
+  const sideQtyEl = document.getElementById("sideQty");
+  const sideTotalEl = document.getElementById("sideTotal");
+
+  if (cartQtyEl) cartQtyEl.innerText = cartQty;
+  if (cartTotalEl) cartTotalEl.innerText = (cartQty * unitPrice).toFixed(2);
+  if (sideQtyEl) sideQtyEl.innerText = cartQty;
+  if (sideTotalEl) sideTotalEl.innerText = (cartQty * unitPrice).toFixed(2);
+}
+
+function checkout() {
+  const msg = document.getElementById("checkout-message");
+  msg.style.display = "block";
+
+  if (cartQty === 0) {
+    msg.innerHTML = "Your shopping cart is empty.";
+  } else {
+    msg.innerHTML = `
+      Connecting to DreamPay 1.2...<br>
+      Verifying SSL certificate...<br>
+      Verifying product availability...<br><br>
+      ERROR: Transaction blocked.<br>
+      Recall notice active: DED-01 units cannot be legally distributed after 12/11/2005.<br><br>
+      Cart reference saved: ORDER-DED-${Math.floor(Math.random() * 90000) + 10000}
+    `;
+  }
+}
+
+function revealManualNote() {
+  document.getElementById("manual-note").style.display = "block";
+}
+
+function revealSecretLog() {
+  document.getElementById("secret-log").style.display = "block";
+}
+
+function sendSupport() {
+  const response = document.getElementById("support-response");
+  response.style.display = "block";
+  response.innerHTML = `
+    Ticket submission failed.<br>
+    Error: support server unavailable since 12/11/2005.<br>
+    Last known operator: M. HART / DREAM ENTRY SYSTEMS
+  `;
+}
+
+function startCounter() {
+  let count = Math.floor(Math.random() * 9000) + 1000;
+  setInterval(function() {
+    count++;
+    document.getElementById("counter").innerText = String(count).padStart(6, "0");
+  }, 3000);
 }
 </script>
 
