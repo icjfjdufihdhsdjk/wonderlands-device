@@ -7,21 +7,17 @@
   <style>
     body {
       margin: 0;
-      background: #dcdcdc url("data:image/gif;base64,R0lGODlhAwADAIAAAP///8zMzCH5BAAAAAAALAAAAAADAAMAAAIDhI9WADs=");
+      background: #dcdcdc;
       font-family: "Times New Roman", serif;
       color: black;
     }
 
-    a {
-      color: blue;
-      text-decoration: underline;
-      cursor: pointer;
-    }
+    a { color: blue; text-decoration: underline; cursor: pointer; }
 
     .container {
-      width: 820px;
+      width: 860px;
       margin: 25px auto;
-      background: #ffffff;
+      background: white;
       border: 2px solid black;
       padding: 20px;
       box-shadow: 4px 4px 0 #888;
@@ -42,9 +38,7 @@
       font-weight: bold;
     }
 
-    @keyframes blink {
-      50% { opacity: 0; }
-    }
+    @keyframes blink { 50% { opacity: 0; } }
 
     .nav {
       text-align: center;
@@ -64,15 +58,22 @@
       font-size: 14px;
     }
 
-    .button:active {
-      border: 2px inset #ddd;
-    }
+    .button:active { border: 2px inset #ddd; }
 
     .content-box {
       border: 1px solid #999;
       background: #fafafa;
       padding: 15px;
-      min-height: 280px;
+      min-height: 330px;
+    }
+
+    .status {
+      font-family: monospace;
+      background: black;
+      color: #66ff66;
+      padding: 10px;
+      border: 1px solid #333;
+      margin: 10px 0;
     }
 
     .warning {
@@ -90,29 +91,68 @@
       color: gray;
     }
 
-    .status {
-      font-family: monospace;
-      background: black;
-      color: #66ff66;
-      padding: 10px;
-      border: 1px solid #333;
-      margin: 10px 0;
+    .shop-layout {
+      display: flex;
+      gap: 20px;
     }
 
-    .small {
+    .product-img {
+      width: 230px;
+      height: 210px;
+      background: linear-gradient(#ddd, #aaa);
+      border: 2px solid #555;
+      text-align: center;
+      position: relative;
+      box-shadow: inset 0 0 20px #777;
+    }
+
+    .device {
+      width: 150px;
+      height: 90px;
+      background: #222;
+      border-radius: 50%;
+      margin: 45px auto 10px auto;
+      border: 4px solid #666;
+      box-shadow: 0 0 12px #333;
+    }
+
+    .device-line {
+      width: 110px;
+      height: 8px;
+      background: #00aaff;
+      margin: 38px auto;
+      box-shadow: 0 0 10px #00aaff;
+    }
+
+    .product-label {
       font-size: 12px;
-      color: #555;
+      color: #333;
+      margin-top: 8px;
+    }
+
+    .price {
+      font-size: 24px;
+      color: darkred;
+      font-weight: bold;
+    }
+
+    .cart-box {
+      border: 1px solid #999;
+      background: #eeeeee;
+      padding: 10px;
+      margin-top: 15px;
+      font-size: 14px;
     }
 
     input, textarea {
       font-family: "Times New Roman", serif;
-      width: 95%;
       padding: 5px;
       margin: 5px 0;
       border: 1px solid #999;
     }
 
     textarea {
+      width: 95%;
       height: 80px;
     }
 
@@ -132,6 +172,8 @@
       display: none;
       margin-top: 15px;
     }
+
+    .small { font-size: 12px; color: #555; }
 
     /* PAGE DE SAISIE */
     .gate {
@@ -159,21 +201,15 @@
       border-bottom: 1px solid #ccc;
     }
 
-    .flag-line {
-      display: flex;
-      height: 6px;
-      margin-bottom: 18px;
-    }
-
+    .flag-line { display: flex; height: 6px; margin-bottom: 18px; }
     .flag-blue { background: #002654; flex: 1; }
-    .flag-white { background: #ffffff; flex: 1; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+    .flag-white { background: white; flex: 1; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
     .flag-red { background: #ce1126; flex: 1; }
 
     .official-title {
       font-size: 18px;
       font-weight: bold;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
     }
 
     .official-subtitle {
@@ -225,9 +261,8 @@
     .enter-area button {
       padding: 8px 16px;
       border: 1px solid #555;
-      background: #ffffff;
+      background: white;
       cursor: pointer;
-      font-size: 13px;
     }
   </style>
 </head>
@@ -242,7 +277,6 @@
         <div class="flag-white"></div>
         <div class="flag-red"></div>
       </div>
-
       <div class="official-title">République française</div>
       <div class="official-subtitle">Notification administrative de restriction d’accès</div>
     </div>
@@ -266,8 +300,7 @@
       <p>L’accès aux archives publiques du domaine reste possible pour consultation.</p>
 
       <div class="legal-note">
-        Cette page est une notification automatisée. Aucun support utilisateur n’est assuré
-        pour les services associés à ce domaine.
+        Cette page est une notification automatisée. Aucun support utilisateur n’est assuré.
       </div>
     </div>
 
@@ -287,6 +320,7 @@
 
   <div class="nav">
     <span class="button" onclick="showPage('home')">Home</span>
+    <span class="button" onclick="showPage('buy')">Buy Now</span>
     <span class="button" onclick="showPage('info')">Product Info</span>
     <span class="button" onclick="showPage('manual')">User Manual</span>
     <span class="button" onclick="showPage('support')">Support</span>
@@ -307,6 +341,9 @@
 </div>
 
 <script>
+let cartQty = 0;
+const unitPrice = 2499.99;
+
 function enterSite() {
   document.getElementById("gate").style.display = "none";
   showPage("home");
@@ -336,10 +373,60 @@ function showPage(page) {
         Dream sync: unstable
       </div>
 
+      <p class="small">Best viewed with Internet Explorer 6.0 or Netscape Navigator.</p>
+    `;
+  }
+
+  if (page === "buy") {
+    content.innerHTML = `
+      <h2>Buy Dream Entry Device DED-01</h2>
+
+      <div class="shop-layout">
+        <div>
+          <div class="product-img">
+            <div class="device">
+              <div class="device-line"></div>
+            </div>
+            <div class="product-label">DED-01 Cranial Sleep Interface</div>
+            <div class="small">Image may differ from final product.</div>
+          </div>
+        </div>
+
+        <div>
+          <h3>Dream Entry Device — DED-01</h3>
+
+          <p>
+            Private sleep interface system for structured dream environment access.
+            Includes control unit, cranial pads, analog sync cable and printed user manual.
+          </p>
+
+          <p class="price">$2,499.99</p>
+
+          <p>
+            <b>Availability:</b> <span style="color:darkred;">RECALLED / LIMITED STOCK</span><br>
+            <b>Condition:</b> Factory sealed<br>
+            <b>Shipping:</b> 6–8 weeks<br>
+            <b>Warranty:</b> void after first sleep cycle
+          </p>
+
+          <button class="submit-btn" onclick="addToCart()">Add to Cart</button>
+          <button class="submit-btn" onclick="checkout()">Checkout</button>
+
+          <div class="cart-box">
+            <b>Shopping Cart</b><br>
+            Items: <span id="cartQty">0</span><br>
+            Total: $<span id="cartTotal">0.00</span>
+          </div>
+
+          <div id="checkout-message" class="hidden-log"></div>
+        </div>
+      </div>
+
       <p class="small">
-        Best viewed with Internet Explorer 6.0 or Netscape Navigator.
+        Secure checkout powered by DreamPay 1.2. SSL certificate expired 11/12/2005.
       </p>
     `;
+    updateCart();
   }
 
   if (page === "info") {
@@ -385,9 +472,7 @@ function showPage(page) {
         <li>ERR-22: unauthorized Wonderland Instance</li>
       </ul>
 
-      <p>
-        <a onclick="revealManualNote()">Click here for archived addendum.</a>
-      </p>
+      <p><a onclick="revealManualNote()">Click here for archived addendum.</a></p>
 
       <div id="manual-note" class="hidden-log">
         ADDENDUM 12/11/2005<br>
@@ -401,9 +486,7 @@ function showPage(page) {
     content.innerHTML = `
       <h2>Support</h2>
 
-      <p>
-        Support services for Dream Entry Systems products are no longer available.
-      </p>
+      <p>Support services for Dream Entry Systems products are no longer available.</p>
 
       <form onsubmit="sendSupport(); return false;">
         <label>Name:</label><br>
@@ -433,9 +516,7 @@ function showPage(page) {
         [12/11/2005 03:50] Connection terminated by remote host
       </div>
 
-      <p>
-        <a onclick="revealSecretLog()">View corrupted entry</a>
-      </p>
+      <p><a onclick="revealSecretLog()">View corrupted entry</a></p>
 
       <div id="secret-log" class="hidden-log">
         [CORRUPTED]<br>
@@ -444,6 +525,38 @@ function showPage(page) {
         wake_state: FAILED<br>
         message: "he is still inside"
       </div>
+    `;
+  }
+}
+
+function addToCart() {
+  cartQty++;
+  updateCart();
+}
+
+function updateCart() {
+  const qty = document.getElementById("cartQty");
+  const total = document.getElementById("cartTotal");
+
+  if (qty && total) {
+    qty.innerText = cartQty;
+    total.innerText = (cartQty * unitPrice).toFixed(2);
+  }
+}
+
+function checkout() {
+  const msg = document.getElementById("checkout-message");
+  msg.style.display = "block";
+
+  if (cartQty === 0) {
+    msg.innerHTML = "Your shopping cart is empty.";
+  } else {
+    msg.innerHTML = `
+      Connecting to DreamPay 1.2...<br>
+      Verifying product availability...<br>
+      ERROR: Transaction blocked.<br><br>
+      Recall notice active: DED-01 units cannot be legally distributed after 12/11/2005.<br>
+      Cart reference saved: ORDER-DED-${Math.floor(Math.random() * 90000) + 10000}
     `;
   }
 }
