@@ -78,11 +78,22 @@
       max-width: 600px;
     }
 
-    .interpol-img {
-      width: 100%;
-      max-width: 400px;
-      margin-bottom: 20px;
+    /* DRAPEAU FRANÇAIS */
+    .flag {
+      display: flex;
+      width: 150px;
+      height: 100px;
+      margin: 0 auto 20px auto;
+      border: 1px solid white;
     }
+
+    .flag div {
+      flex: 1;
+    }
+
+    .blue { background: blue; }
+    .white { background: white; }
+    .red { background: red; }
 
     .gate-box h1 {
       color: red;
@@ -110,7 +121,12 @@
 <div id="gate" class="gate">
   <div class="gate-box">
 
-    <img src="interpol-banner.png" class="interpol-img">
+    <!-- DRAPEAU -->
+    <div class="flag">
+      <div class="blue"></div>
+      <div class="white"></div>
+      <div class="red"></div>
+    </div>
 
     <h1>OFFICIAL SEIZURE NOTICE</h1>
 
