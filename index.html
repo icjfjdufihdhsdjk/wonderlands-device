@@ -6,6 +6,7 @@
 
   <style>
     body {
+      margin: 0;
       background-color: #dcdcdc;
       font-family: "Times New Roman", serif;
       color: black;
@@ -13,7 +14,7 @@
 
     .container {
       width: 800px;
-      margin: auto;
+      margin: 25px auto;
       background: #ffffff;
       border: 2px solid black;
       padding: 20px;
@@ -55,100 +56,171 @@
       color: gray;
     }
 
-    /* INTERPOL SCREEN */
+    /* PAGE DE SAISIE */
     .gate {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: black;
-      color: lime;
+      inset: 0;
+      background: #f4f4f4;
+      color: #111;
+      z-index: 9999;
+      font-family: Arial, Helvetica, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 9999;
-      font-family: monospace;
     }
 
-    .gate-box {
-      text-align: center;
-      border: 2px solid lime;
-      padding: 30px;
-      max-width: 600px;
+    .seizure-box {
+      width: 720px;
+      background: white;
+      border: 1px solid #9a9a9a;
+      box-shadow: 0 0 18px rgba(0,0,0,0.25);
     }
 
-    /* DRAPEAU FRANÇAIS */
-    .flag {
+    .official-top {
+      border-top: 8px solid #002654;
+      padding: 18px 24px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .flag-line {
       display: flex;
-      width: 150px;
-      height: 100px;
-      margin: 0 auto 20px auto;
-      border: 1px solid white;
+      height: 6px;
+      margin-bottom: 18px;
     }
 
-    .flag div {
-      flex: 1;
+    .flag-blue { background: #002654; flex: 1; }
+    .flag-white { background: #ffffff; flex: 1; border-top: 1px solid #ddd; border-bottom: 1px solid #ddd; }
+    .flag-red { background: #ce1126; flex: 1; }
+
+    .official-title {
+      font-size: 18px;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .blue { background: blue; }
-    .white { background: white; }
-    .red { background: red; }
-
-    .gate-box h1 {
-      color: red;
+    .official-subtitle {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #555;
     }
 
-    .gate button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      background: black;
-      color: lime;
-      border: 1px solid lime;
+    .notice-content {
+      padding: 24px;
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .notice-heading {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 18px;
+      color: #1a1a1a;
+    }
+
+    .case-info {
+      background: #f1f1f1;
+      border-left: 4px solid #002654;
+      padding: 12px;
+      margin: 18px 0;
+      font-size: 13px;
+    }
+
+    .case-info b {
+      display: inline-block;
+      width: 130px;
+    }
+
+    .legal-note {
+      font-size: 12px;
+      color: #555;
+      border-top: 1px solid #ddd;
+      margin-top: 22px;
+      padding-top: 12px;
+    }
+
+    .enter-area {
+      background: #eeeeee;
+      border-top: 1px solid #ccc;
+      padding: 16px 24px;
+      text-align: right;
+    }
+
+    .enter-area button {
+      padding: 8px 16px;
+      border: 1px solid #555;
+      background: #ffffff;
       cursor: pointer;
+      font-size: 13px;
     }
 
-    .gate button:hover {
-      background: lime;
-      color: black;
+    .enter-area button:hover {
+      background: #e0e0e0;
     }
   </style>
 </head>
 
 <body>
 
-<!-- INTERPOL GATE -->
 <div id="gate" class="gate">
-  <div class="gate-box">
+  <div class="seizure-box">
 
-    <!-- DRAPEAU -->
-    <div class="flag">
-      <div class="blue"></div>
-      <div class="white"></div>
-      <div class="red"></div>
+    <div class="official-top">
+      <div class="flag-line">
+        <div class="flag-blue"></div>
+        <div class="flag-white"></div>
+        <div class="flag-red"></div>
+      </div>
+
+      <div class="official-title">
+        République française
+      </div>
+      <div class="official-subtitle">
+        Notification administrative de restriction d’accès
+      </div>
     </div>
 
-    <h1>OFFICIAL SEIZURE NOTICE</h1>
+    <div class="notice-content">
+      <div class="notice-heading">
+        Accès au domaine temporairement restreint
+      </div>
 
-    <p>
-      This domain has been seized by the International Criminal Police Organization (INTERPOL)
-      in coordination with international law enforcement agencies.
-    </p>
+      <p>
+        Ce domaine a fait l’objet d’une mesure de restriction dans le cadre d’une procédure
+        de coopération internationale relative à la diffusion de dispositifs expérimentaux
+        non homologués.
+      </p>
 
-    <p>
-      Unauthorized access is prohibited and may be subject to prosecution.
-    </p>
+      <p>
+        Les contenus précédemment accessibles sur ce serveur sont conservés à des fins
+        d’analyse technique. Toute consultation peut être enregistrée dans les journaux
+        d’accès du système.
+      </p>
 
-    <p style="margin-top:20px;">
-      Do you wish to proceed?
-    </p>
+      <div class="case-info">
+        <div><b>Référence :</b> INT-FR/DED-01/2005-11</div>
+        <div><b>Statut :</b> Conservation technique</div>
+        <div><b>Dernière action :</b> 12/11/2005</div>
+        <div><b>Objet :</b> Dream Entry Device — DED-01</div>
+      </div>
 
-    <button onclick="enterSite()">ENTER</button>
+      <p>
+        L’accès aux archives publiques du domaine reste possible pour consultation.
+      </p>
+
+      <div class="legal-note">
+        Cette page est une notification automatisée. Aucun support utilisateur n’est assuré
+        pour les services associés à ce domaine.
+      </div>
+    </div>
+
+    <div class="enter-area">
+      <button onclick="enterSite()">Consulter les archives</button>
+    </div>
 
   </div>
 </div>
 
-<!-- TON SITE -->
 <div class="container">
 
   <div class="header">
