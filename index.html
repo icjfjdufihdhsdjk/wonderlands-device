@@ -151,15 +151,16 @@
       margin-bottom: 15px;
     }
 
-    .device {
-      width: 155px;
-      height: 90px;
-      background: #222;
-      border-radius: 50%;
-      margin: 35px auto 10px auto;
-      border: 4px solid #666;
-      box-shadow: 0 0 12px #333;
-    }
+.device {
+  width: 155px;
+  height: 90px;
+  background: #222;
+  border-radius: 50%;
+  margin: 35px auto 10px auto;
+  border: 4px solid #666;
+  box-shadow: 0 0 12px #333;
+  cursor: pointer;
+}
 
     .device-line {
       width: 110px;
@@ -760,6 +761,19 @@ function startCounter() {
   }, 3000);
 }
 </script>
+  document.addEventListener("click", function(e) {
+  if (e.target.closest(".device")) {
+    openDreamAccess();
+  }
+});
+
+function openDreamAccess() {
+  const password = prompt("ACCÈS CAMÉRAS DES RÊVES\n\nMot de passe requis :");
+
+  if (password === null) return;
+
+  alert("Mot de passe incorrect.\n\nIndice : le signal W-04 répond encore.");
+}
 
 </body>
 </html>
