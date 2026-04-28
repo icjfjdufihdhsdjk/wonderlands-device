@@ -788,7 +788,12 @@ function checkDreamPassword() {
   const msg = document.getElementById("dreamLoginMessage");
 
   msg.style.display = "block";
-  msg.innerHTML = "ACCESS DENIED<br>Hint: W-04 is still responding.";
+
+  if (password.toLowerCase() === "w-04") {
+    showDreamCameras();
+  } else {
+    msg.innerHTML = "ACCESS DENIED";
+  }
 }
 </script>
  
