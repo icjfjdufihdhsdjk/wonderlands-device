@@ -796,17 +796,42 @@ function checkDreamPassword() {
   }
 }
 
-function showDreamCameras() {
+
+  function showDreamCameras() {
   const content = document.getElementById("content");
 
   content.innerHTML = `
-    <h2>Dream Camera Feed — Instance W-04</h2>
+    <h2>Security Camera Feed — W-04</h2>
 
     <div class="status">
-      ACCESS GRANTED<br>
-      CONNECTING...<br>
-      SIGNAL LOCKED<br>
-      USER STATUS: NOT FOUND
+      CAMERA SYSTEM ONLINE<br>
+      FEED STATUS: ACTIVE<br>
+      LOCATION: UNKNOWN
+    </div>
+
+    <div class="hidden-log" style="display:block;">
+      [CAMERA 01]<br>
+      corridor<br>
+      walls slightly further apart than before<br><br>
+
+      [CAMERA 02]<br>
+      room<br>
+      door open<br>
+      exterior not matching interior structure<br><br>
+
+      [CAMERA 03]<br>
+      stairwell<br>
+      steps continue beyond visible range<br><br>
+
+      [CAMERA 04]<br>
+      hallway<br>
+      object placed at end of corridor<br>
+      not present in previous frame<br><br>
+
+      [CAMERA 05]<br>
+      storage room<br>
+      door left open<br>
+      view beyond: void-like space<br>
     </div>
   `;
 }
