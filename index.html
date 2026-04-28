@@ -765,6 +765,9 @@ function startCounter() {
 function showDreamLogin() {
   const content = document.getElementById("content");
 
+function showDreamLogin() {
+  const content = document.getElementById("content");
+
   content.innerHTML = `
     <h2>Dream Camera Access</h2>
 
@@ -794,6 +797,21 @@ function checkDreamPassword() {
   } else {
     msg.innerHTML = "ACCESS DENIED";
   }
+}
+
+function showDreamCameras() {
+  const content = document.getElementById("content");
+
+  content.innerHTML = `
+    <h2>Dream Camera Feed — Instance W-04</h2>
+
+    <div class="status">
+      ACCESS GRANTED<br>
+      CONNECTING...<br>
+      SIGNAL LOCKED<br>
+      USER STATUS: NOT FOUND
+    </div>
+  `;
 }
 </script>
  
