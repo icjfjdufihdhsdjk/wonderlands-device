@@ -426,7 +426,9 @@
   </div>
 
   <div class="store-header">
-    <div class="logo">Dream Entry Systems Online Store</div>
+    <div class="logo">
+  <span onclick="showDreamLogin()" style="cursor:pointer;">Dream</span> Entry Systems Online Store
+</div>
     <div class="tagline">
       Advanced Sleep Technology Since 2001 — Official DED-01 Distributor
     </div>
@@ -760,18 +762,33 @@ function startCounter() {
     document.getElementById("counter").innerText = String(count).padStart(6, "0");
   }, 3000);
 }
-  document.addEventListener("click", function(e) {
-  if (e.target.closest(".device")) {
-    openDreamAccess();
-  }
-});
+function showDreamLogin() {
+  const content = document.getElementById("content");
 
-function openDreamAccess() {
-  const password = prompt("ACCÈS CAMÉRAS DES RÊVES\n\nMot de passe requis :");
+  content.innerHTML = `
+    <h2>Dream Camera Access</h2>
 
-  if (password === null) return;
+    <div class="status">
+      DREAM CAMERA NETWORK<br>
+      STATUS: LOCKED<br>
+      AUTHORIZATION REQUIRED
+    </div>
 
-  alert("Mot de passe incorrect.\n\nIndice : le signal W-04 répond encore.");
+    <p>Please enter access password:</p>
+
+    <input id="dreamPassword" type="password" placeholder="Password">
+    <button class="submit-btn" onclick="checkDreamPassword()">Access Cameras</button>
+
+    <div id="dreamLoginMessage" class="hidden-log"></div>
+  `;
+}
+
+function checkDreamPassword() {
+  const password = document.getElementById("dreamPassword").value;
+  const msg = document.getElementById("dreamLoginMessage");
+
+  msg.style.display = "block";
+  msg.innerHTML = "ACCESS DENIED<br>Hint: W-04 is still responding.";
 }
 </script>
  
